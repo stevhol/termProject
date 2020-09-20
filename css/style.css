@@ -1,1 +1,29 @@
 /* CSS styles for term project by Steven Holthouser */
+body {
+background-color: #457B9D
+}
+
+h1 {
+color: #1D3557
+}
+
+p {
+color: #F1FAEE
+}
+
+h2 {
+color: #1D3557
+    }
+
+p2 {
+color: #F1FAEE;
+border-left: 1rem solid #A8DADC;
+}
+
+img {
+    border: 1px solid #000000
+}
+
+a {
+color: #E63946
+}
