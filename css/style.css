@@ -1,10 +1,10 @@
 /* CSS styles for term project by Steven Holthouser */
 body {
-background-color: #cad2c5
+background-color: #EBEBE8
 }
 
 h1 {
-color: #52796f;
+color: #778A35;
 margin-top: 120px;
 margin-left: 150px;
 font-family: 'Oswald', sans-serif;
@@ -13,17 +13,16 @@ text-align: center
 }
 
 p {
-color: #2f3e46;
+color: #31352E;
 font-family: 'Montserrat', sans-serif;
 font-size: 20px;
-margin-left: 150px;
 text-align: left;
 text-align: justify;
 }
 
 h3 {
-color: #52796f;
-margin-top: 65px;
+color: #778A35;
+margin-top: 30px;
 margin-left: 150px;
 padding-bottom: 10px;
 font-family: 'Oswald', sans-serif;
@@ -32,11 +31,32 @@ text-align: center
 
 img {
 margin-top: 100px;
-margin-left: 100px;
-border: 4px solid #354f52;
+margin-left: 80px;
+margin-bottom: 150px;
+border: 4px solid #31352E;
 vertical-align: top
 }
 
 a {
-color: #84a98c
+color: #778A35
+}
+
+#box {
+color: #D1E2C4;
+text-align: center
+}
+
+h5 {
+    color: #778A35;
+    padding-bottom: 10px;
+    font-family: 'Oswald', sans-serif;
+    text-align: center
+    }
+
+.card {
+    min-height: 100px;
+}
+
+.info {
+margin-left: 150px
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CBSC-240</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style2.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Oswald&display=swap" rel="stylesheet">
+    </head>
+    <main>
+        <body>
+            <div>
+                <div>
+                    <h1>CBSC-240: Mind Analytics</h1>
+                        <p style=text-align:center>This is the term project that I completed with my partner, Yoo-Jean Han, for Mind Analytics. We were given an array of datasets to choose from, each covering a different topic. We chose a dataset from the study <em>Gender Differences in COVID-19 Attitudes and Behavior: Panel Evidence from 8 Countries</em> (Galasso, Pons, Profeta, Brouard, & Foucault, 2020). As the name suggests, this dataset aimed to investigate where differences in attitudes and behavior toward the novel COVID-19 virus may lie, across country. The countries that we chose for our analysis were the United States, Italy and New Zealand. We chose this way because we felt that these three countries responded differently in public health measures at the beginning of the pandemic.</p>
+                        <p style=text-align:center>For this project, we were tasked with creating variables based on the data, and using those to create a model that explains an outcome of choice. In our case, the outcome variables of interest were overall agreement and overall compliance with COVID-19 regulations. Upon creating a model, we ran correlation and regression analyses to understand the nature of the variables and how they relate to the outcome. All of our work in the process is documented below, with some figures/graphs to accompany the data. At the end of the page, you can find the final R Markdown file for our project, if you are interested in seeing the process in R.</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h3>Research Questions</h3>
+                        <p style=text-align:center>How do women and men differ in attitudes and behaviors regarding the changes in daily life caused by COVID-19?</p>
+                        <p style=text-align:center>How does the US, Italy, and New Zealand differ in attitudes and behaviors regarding the changes in daily life caused by COVID-19?</p>
+                </div>
+                <div>
+                    <h3>Creating a Factor Model in R</h3>
+                    <img src="images/covid model.png" class="mx-auto" style="width:45%">
+                        <p style=text-align:center>Before the creation of the model, we created two data frames to cover the constructs of attitude and behavior. For attitudes regarding COVID-19, we created latent variables that included 3-4 of the variables from the original dataset. Health Attitudes was concerned with the individual's agreement with general health guidelines put in place by experts, with items like <em>trustscientists</em> and <em>agreesystematictesting</em> constituting the latent variable. Restriction Attitudes were more so focused on the individual's agreement with local regulations placed on daily life, such as <em>agreecurfew</em> and <em>agreewearingmask</em>. Industry Attitudes were focused on the agreement with changes in industry as a result of COVID-19, with examples of items included being <em>agreeschoolclosed</em> and <em>agreebusinessclosed</em>. And lastly, National Attitudes reflected a broader sentiment toward government handling of COVID-19, with items including <em>agreepostponeelection</em> and <em>serioushealthcons</em>. </p>
+                        <p style=text-align:center>For the behavior construct, the same process was utilized, with 3 latent variables created. Sanitation Behavior represented behaviors that promote sanitary well-being such as <em>washhands</em> and <em>nophysicalgreet</em>, Social Behavior represented behaviors about social distancing and leaving the home for essential activities such as <em>noseefriends</em> and <em>nocrowded</em>, and General Health Behavior represents the variables <em>wearmask</em> and <em>weargloves</em>. After creating the latent variables, we correlated the items within each variable to ensure that they truly went together.</p>
+                        <p style=text-align:center>Using Exploratory Factor Analysis (EFA) and Confirmatory Factor Analysis (CFA), we created the model in the image above. EFA was utilized to determine how many dimensions were necessary for the model, which our analysis yielded that we would need 2-3 factors for the most valid model. Once getting those numbers, we ran a CFA on the 2-factor and 3-factor models, and from using fit indices and standardized loadings we determined that the 2-factor model was the best fit. The standardized loadings are above on the lines connecting to the latent variables. For a more in-depth explanation of the EFA and CFA process, check out the R Markdown file below. </p>
+                </div>
+                <div>
+                    <h3>Correlation and Regression Analyses</h3>
+                    <img src="images/PairsPanels agreement.png" class="mx-auto" style="width:45%">
+                    <h5>Correlations for agreement variables and overall agreement</h5>
+                    <img src="images/PairsPanels behavior.png" class="mx-auto" style="width:45%">
+                    <h5>Correlations for behavior variables and overall behavior</h5>
+                    <p style=text-align:center>To run correlational analyses about the latent variables and the outcome variables, we used the <em>pairs.panels()</em> function in R. This function will produce a grid like the ones you see above. To understand how the latent variables correlate with the outcome, look at the r values above the panel for overall_agree and overall_compliance. From this, you can see which row value is connected with its corresponding r value. In attitudes, the corrlational values for the three latent variables on overall_agree are rather high, at 0.64 (health_attitudes), 0.80 (restriction_attitudes), 0.89 (industry_attitudes), and 0.80 (national_attitudes). For behavior, all but one of the r values were high, at 0.82 (sanitation_behavior), 0.84 (social_behavior), and 0.61 (generalhealth_behavior). Out of all of the created latent variables, generalhealth_behavior correlated with its outcome variable the least.</p>
+                    <img src="images/regression table.png" class="mx-auto" style="width:60%">
+                    <h5>Standardized beta values for latent variables</h5>
+                    <p style=text-align:center>After running the correlation analyses, we ran regression analyses to determine how much each latent variable predicted its respective outcome variable. The standardized beta coefficient is the metric used to assess this in a regressional analysis. For this, we ran both bivariate and multiple regressions, to understand shared variances between the variables. In the table above, you can see the standardized beta values from the multiple regression. For attitudes, industry_attitudes has the strongest predictive power (0.46) for overall agreement. For behavior, social_behavior has the strongest predictive power (0.46) for overall compliance. Again, it is interesting to note here how most of the attitude latent variables are strong in the correlational value, but their predictive power is not very strong.</p>
+                </div>
+                <div>
+                    <h3>Group Comparison using Measurement Invariance</h3>
+                    <p>Our next step is to determine the fairness of our survey data. We can determine if there are any biases present by looking at measurement invariance. In order to answer our two research questions, we analyzed the measurement invariance by creating models for both sex and country.</p>
+                    <p>After we created the models, we must perform model comparisons in order to see which type of invariance exists in the data. To do this, we must compare the CFI, RMSEA, and SRMR values between each level of strictness. If there is a jump in value between models that is GREATER than the 90% confidence interval, we can determine that the models can no longer be compared at a higher level of strictness.</p>
+                    <img src="images/comparison sex actual.png" class="mx-auto" style="width:45%">
+                    <h5>Invariance Model by Sex</h5>
+                    <p>When we performed these group comparisons by sex, we were able to determine that the model followed the strict invariance model. The CFI and SRMR values stayed very consistent across all four models, and the RMSEA value did not change by a value of more than 0.015, which was the 90% confidence interval. Thus, we can conclude with strong evidence that the survey was not biased against males or females.</p>
+                    <img src="images/comparison sex.png" class="mx-auto" style="width:45%">
+                    <h5>Invariance Model by Country</h5>
+                    <p>When we performed these group comparisons by country, we determined that the model followed a weak invariance model. Unlike the gender model, we witnessed a very large increase in RMSEA value from the weak model to the strong model (0.106 vs. 0.175, a 0.069 difference). This difference was much larger than our 90% confidence interval of 0.015. Additionally, we saw that CFI decreased from 0.927 to 0.758 (0.169 difference), and SRMR increased from 0.066 to 0.161 (0.095 difference) between the weak and strong model. Thus, we could not continue comparing the groups at the strict model. While the structure of test is similar, it functions differently in how each item loads onto each factor and their starting points differ slightly. Therefore, we can conclude that there is evidence that the survey is biased against countries.</p>
+                </div>
+                <div>
+                    <h3>More Graphs</h3>
+                    <img src="images/layperson attitude.png" class="mx-auto" style="width:45%">
+                    <h5>Attitude Scores across Country</h5>
+                    <p>When looking at the bar chart of the agreeableness in attitudes across country, we can see that the USA has the lowest attitude score in all four latent variables compared to Italy and New Zealand. This means that individuals from the US are generally less agreeable towards attitudes developed during the COVID-19 pandemic than individuals from Italy or New Zealand. Italy had higher scores in national_attitudes and restriction_attitudes, and New Zealand had higher scores in health_attitudes and industry_attitudes.</p>
+                    <img src="images/layperson behavior.png" class="mx-auto" style="width:45%">
+                    <h5>Behavior Scores across Country</h5>
+                    <p>When comparing our results by country, we can see once again that the US has the lowest behavior scores in sanitation_behavior and social_behavior. This corresponds with the low agreeableness regarding attitude in the US. Additionally, Italy has the highest compliance in these two latent variables as well, which could be correlated with the country having the highest attitude score in two of the attitude latent variables. Therefore, the US has the lowest levels of agreeableness and compliance among the three countries, and Italy has the highest compliance, and one of the higher score of agreeableness as well.</p>
+                    <img src="images/layperson sex attitude.png" class="mx-auto" style="width:45%">
+                    <h5>Attitude Scores across Sex</h5>
+                    <p>Looking at our first bar chart depicting agreeableness in attitudes across sex, we see that females have higher scores in all four latent variables. Thus, it is possible that there is a distinct difference in COVID-19 behavior between men and women, where women are generally more agreeable towards guidelines and restrictions than men. Additionally, men and women seem to follow the same general trend in their which attitudes they agree with most. The highest scores for men and women are for health_attitudes, followed by industry_attitudes, national_attitudes, and finally, restriction_attitudes.</p>
+                    <img src="images/layperson sex behavior.png" class="mx-auto" style="width:45%">
+                    <h5>Behavior Scores across Sex</h5>
+                    <p>When we observe the differences in behavior scores across sex, we see once again that females have higher scores than males in all three latent variables. This provides more evidence that gender differences are present regarding COVID-19 attitudes and behaviors.</p>
+                </div>
+                <div>
+                    <h3>Conclusion</h3>
+                    <p>In conclusion, we can say with confidence that women and men do differ in attitudes and behaviors regarding the changes in daily life caused by COVID-19. Across both attitude and behavior, females had higher score in all categories compared to men. This means that on average, women have higher agreeableness and compliance with COVID-19 guidelines and behaviors.</p>
+                    <p>When looking across countries, the conclusion is not as clear. However, there does seem to be a difference between the US, and Italy and New Zealand. The United States had the lowest scores in all attitude and behavior latent variables except for generalhealth_behavior which may not be an accurate variable of comparison to begin with. Determining a difference between Italy and New Zealand is slightly more difficult. Italy had higher behavior scores, but when looking at attitude scores, both New Zealand and Italy had the highest scores in two latent variables. Thus, there is evidence that there is a difference in behavior between these two countries. There is also some evidence that there is a difference in attitude, but it is not clear cut.</p>
+                </div>
+                <div>
+                    <h3>R Markdown File</h3>
+                        <p style=text-align:center>Click <a href="files/CBSC-240 Final Project RMD.pdf">here</a> to see the PDF version of the work we completed in R for this project.</p>
+                </div>
+            </div>
+        </body>
+    </main>
